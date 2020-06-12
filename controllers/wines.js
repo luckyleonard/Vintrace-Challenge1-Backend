@@ -1,6 +1,45 @@
 const fs = require('fs');
 const path = require('path');
 
+const getWineByLot = (lot, wines) => {
+  const wineDetail = wines.find((wine) => wine.lotCode === lot);
+  return wineDetail;
+};
+
+const groupBy = (properties, components) => {
+  let groupResult = {};
+
+  if (!components) {
+    return groupResult;
+  }
+
+  groupResult = components.reduce((previousValue, currentComponent) => {
+    const groupName = properties
+      .map((property) => currentComponent[property])
+      .join(' - ');
+    (previousValue[groupName] = previousValue[groupName] || []).push(
+      currentComponent
+    );
+    return previousValue;
+  }, {});
+  return groupResult;
+};
+
+const getBreakdown = (groupResult) => {
+  const breakdownResult = [];
+  for (const groupKey in groupResult) {
+    const percentage = groupResult[groupKey].reduce(
+      (previousValue, currentComponent) => {
+        return previousValue + currentComponent.percentage;
+      },
+      0
+    );
+    breakdownResult.push({ percentage, key: groupKey });
+  }
+  breakdownResult.sort((a, b) => b.percentage - a.percentage);
+  return breakdownResult;
+};
+
 class WinesController {
   constructor() {
     this.wines = [];
@@ -19,6 +58,14 @@ class WinesController {
 
   getWines(req, res) {
     res.send(this.wines);
+  }
+
+  getBreakdownByYear(req, res) {
+    const { lotCode } = req.params;
+    const wineComponents = getWineByLot(lotCode, this.wines).components;
+    const groupResult = groupBy(['year'], wineComponents);
+    const breakdownResult = getBreakdown(groupResult);
+    res.send(breakdownResult);
   }
 }
 

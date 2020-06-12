@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const wines = require('../controllers/wines');
+const winesController = require('../controllers/wines');
 
 router.get('/', function (req, res) {
-  wines.getWines(req, res);
+  winesController.getWines(req, res);
+});
+
+router.get('/:lotCode/getYearBreakdown', function (req, res) {
+  winesController.getBreakdownByYear(req, res);
 });
 
 module.exports = router;
