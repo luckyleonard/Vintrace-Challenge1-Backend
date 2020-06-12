@@ -15,8 +15,10 @@ const groupBy = (properties, components) => {
 
   groupResult = components.reduce((previousValue, currentComponent) => {
     const groupName = properties
-      .map((property) => currentComponent[property])
-      .join(' - ');
+      .map((property) => {
+        return currentComponent[property] ? currentComponent[property] : '';
+      })
+      .join('-');
     (previousValue[groupName] = previousValue[groupName] || []).push(
       currentComponent
     );
@@ -40,6 +42,20 @@ const getBreakdown = (groupResult) => {
   return breakdownResult;
 };
 
+const getBreakdownBy = (properties, lotCode, wines) => {
+  const wineComponents = getWineByLot(lotCode, wines).components;
+  const groupResult = groupBy(properties, wineComponents);
+  const breakdownResult = getBreakdown(groupResult);
+  return breakdownResult;
+};
+
+const getResponseWithBreakdown = (types, breakdown) => {
+  return {
+    breakdownType: types.join('-'),
+    breakdown,
+  };
+};
+
 class WinesController {
   constructor() {
     this.wines = [];
@@ -60,12 +76,38 @@ class WinesController {
     res.send(this.wines);
   }
 
+  getWineDetail(req, res) {
+    const { lotCode } = req.params;
+    const wineDetail = getWineByLot(lotCode, this.wines);
+    res.json(wineDetail);
+  }
+
   getBreakdownByYear(req, res) {
     const { lotCode } = req.params;
-    const wineComponents = getWineByLot(lotCode, this.wines).components;
-    const groupResult = groupBy(['year'], wineComponents);
-    const breakdownResult = getBreakdown(groupResult);
-    res.send(breakdownResult);
+    const properties = ['year'];
+    const breakdownResult = getBreakdownBy(properties, lotCode, this.wines);
+    res.json(getResponseWithBreakdown(properties, breakdownResult));
+  }
+
+  getBreakdownByVariety(req, res) {
+    const { lotCode } = req.params;
+    const properties = ['variety'];
+    const breakdownResult = getBreakdownBy(properties, lotCode, this.wines);
+    res.json(getResponseWithBreakdown(properties, breakdownResult));
+  }
+
+  getBreakdownByRegion(req, res) {
+    const { lotCode } = req.params;
+    const properties = ['region'];
+    const breakdownResult = getBreakdownBy(properties, lotCode, this.wines);
+    res.json(getResponseWithBreakdown(properties, breakdownResult));
+  }
+
+  getBreakdownByYearAndVariety(req, res) {
+    const { lotCode } = req.params;
+    const properties = ['year', 'variety'];
+    const breakdownResult = getBreakdownBy(properties, lotCode, this.wines);
+    res.json(getResponseWithBreakdown(properties, breakdownResult));
   }
 }
 
