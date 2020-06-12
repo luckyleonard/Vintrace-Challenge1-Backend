@@ -1,0 +1,31 @@
+{
+	"lotCode":"11YVCHAR002",
+	"volume":5077.0,
+	"description":null,
+	"tankCode":"T25-06",
+	"productState":null,
+	"ownerName":"YV Wines P/L and Vintage Kerr Joint Venture",
+	"components":[
+		{
+			"percentage":5.0,
+			"year":2011,
+			"variety":"Pinot Noir",
+			"region":"Mornington"
+		},{
+			"percentage":80.0,
+			"year":2011,
+			"variety":"Chardonnay",
+			"region":"Yarra Valley"
+		},{
+			"percentage":5.0,
+			"year":2010,
+			"variety":"Pinot Noir",
+			"region":"Macedon"
+		},{
+			"percentage":10.0,
+			"year":2010,
+			"variety":"Chardonnay",
+			"region":"Macedon"
+		}
+	]
+}

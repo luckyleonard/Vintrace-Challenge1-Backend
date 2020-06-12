@@ -1,0 +1,62 @@
+{
+	"lotCode":"15MPPN002-VK",
+	"volume":100000.0,
+	"description":"2015 Mornington Peninsula Pinot Noir - Vintage Kerr special batch",
+	"tankCode":"T100-03",
+	"productState":"Filtered",
+	"ownerName":"Vintage Kerr",
+	"components":[
+		{
+			"percentage":60.0,
+			"year":2015,
+			"variety":"Pinot Noir",
+			"region":"Mornington"
+		},{
+			"percentage":2.0,
+			"year":2015,
+			"variety":"Pinot Noir",
+			"region":"Yarra Valley"
+		},{
+			"percentage":5.0,
+			"year":2014,
+			"variety":"Pinot Noir",
+			"region":"Yarra Valley"
+		},{
+			"percentage":3.0,
+			"year":2015,
+			"variety":"Merlot",
+			"region":"Yarra Valley"
+		},{
+			"percentage":1.0,
+			"year":2015,
+			"variety":"Shiraz",
+			"region":"Mornington"
+		},{
+			"percentage":2.0,
+			"year":2015,
+			"variety":"Zinfandel",
+			"region":"Macedon"
+		},{
+			"percentage":2.0,
+			"year":2014,
+			"variety":"Malbec",
+			"region":"Port Phillip"
+		},{
+			"percentage":10.0,
+			"year":2014,
+			"variety":"Pinot Noir",
+			"region":"Mornington"
+		},{
+			"percentage":10.0,
+			"year":2015,
+			"variety":"Pinot Noir",
+			"region":"Mornington"
+		},
+		{
+			"percentage":5.0,
+			"year":2013,
+			"variety":"Cabernet",
+			"region":"Heathcote"
+		}
+	]
+}
